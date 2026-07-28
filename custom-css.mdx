@@ -1,24 +1,18 @@
 ---
 title: "Custom CSS"
-description: "Learn how to upload custom CSS to match your floor plan viewer to your brand's look and feel."
+description: "Take full control of your viewer's styling with your own CSS, written and previewed live inside the style editor."
 ---
 
-## Before You Begin
+When the style editor's themes, colors and fonts aren't enough, you can write your own CSS. Your rules load **after** the default Planpoint styles, so you only need to write what you want to change.
 
-### Requirements
+<Warning>
+  Custom CSS is layered on top of the default theme — never publish a copy of the whole default stylesheet. If you do, your viewer freezes at that version of the design and stops picking up future product updates and fixes.
+</Warning>
 
-- Custom CSS must be enabled in your project settings (see "Enabling Custom CSS" below)
-- The custom CSS file must use the correct selectors to work properly (more on this below)
+## Before you begin
 
-### Important Note
-
-Even after enabling Custom CSS in your settings, **you must add `?customCss=true` to your embed URLs** for the custom styles to load. Without this parameter, the viewer will use the default theme.
-
-**Example:**
-
-```text
-https://viewer.planpoint.io/embed/your-project?customCss=true
-```
+- Your embed URLs need `?customCss=true` for the custom styles to load (see [Step 4](#step-4-add-the-url-parameter)).
+- Nested elements must be targeted with wildcard selectors such as `[class*="unitTile"]` — plain class names won't work (see [Understanding CSS selectors](#understanding-css-selectors)).
 
 ---
 
@@ -28,61 +22,81 @@ https://viewer.planpoint.io/embed/your-project?customCss=true
 
 ---
 
-## How to Set Up Custom CSS
+## How to set up custom CSS
 
-### Step 1: Enable Custom CSS
+### Step 1: Open the CSS editor
 
-1. Go to **Style & Embed**
-2. Navigate to **Style** → **Custom CSS**
-3. Toggle the Custom CSS feature to **Enabled**
+1. Go to **Style & Embed** → **Style**
+2. Click **Customize** to open the style editor
+3. In the toolbar at the bottom of the preview, click the **`</>` Custom CSS** button
 
-### Step 2: Download the Default Template
+The left sidebar turns into a code editor, and the preview on the right stays live.
 
-Before creating your custom CSS, download our default theme template as your starting point:
+<Frame caption="The custom CSS editor inside the style editor">
+  ![Clean Shot 2026 07 28 At 11 43 52@2x](/images/CleanShot-2026-07-28-at-11.43.52@2x.png "Clean Shot 2026 07 28 At 11 43 52@2x")
+</Frame>
 
-1. In the **Custom CSS** settings section, click **Download Default Template**
-2. Save the `planpoint-theme.css` file to your computer
+The editor opens on a short comment block — an empty starting point that changes nothing until you write your first rule.
 
-**Why start with the template?** Our template includes all the correct selectors that work with Planpoint's system. Modifying it ensures your custom CSS will work properly.
+### Step 2: Write your rules
 
-### Step 3: Customize Your CSS
+Type in the editor and the preview updates instantly — no upload, no reload.
 
-Open the downloaded CSS file in any text editor and make your changes. Here's what you can customize:
+- Pick a block from **Insert snippet** — Brand colours, Filter bar, Unit cards, Unit detail
+  - CTA buttons, Status badges, and more. Each one is pre-filled with the current default values, so you edit instead of starting from a blank page.
+- Click **Select element**, then click anything in the preview. Planpoint works out the right selector for it, drops an empty rule into the editor and lists the element's current values as comments you can uncomment and edit. Press <kbd>Esc</kbd> to cancel. If the selector is already in your file, the cursor jumps to it instead.
+- Use the **Desktop / Tablet / Mobile** buttons to check your styles at every breakpoint.
+- Drag the sidebar's right edge to give the editor more room — the width is remembered.
+- Collapse the sidebar (the **`‹`** button) for a full-width preview; your work is kept.
+- Right-click an element in the preview and choose **Inspect** to find the selector you need.
+- Click **View default theme** to read the current default stylesheet **for reference** — read it to find selectors, but don't paste it into the editor.
 
-**Brand Colors**
+<Tip>
+  Add the **Brand colours** snippet first. It defines the variables the other snippets read, so one colour change carries through every block you add afterwards.
+</Tip>
 
-- Primary and accent colors
-- Status indicators (Available, Sold, Reserved)
-- Background and text colors
+#### Available snippets
 
-**Typography**
+| Snippet | What it covers |
+| --- | --- |
+| **Brand colours** | `--pp-brand-*` variables every other snippet reads |
+| **Typography** | Base font family and the price type scale |
+| **Filter bar** | Filter wrapper background and dropdown toggles |
+| **Unit cards (grid)** | Card radius, border and hover lift |
+| **Unit list (table)** | Table headers and row hover |
+| **Unit detail \+ CTA buttons** | Unit card, "Request info" buttons, shortlist button |
+| **Status badges** | Available / sold / leased / reserved / on hold |
+| **Portal header** | Header bar and its call-to-action buttons |
+| **Floor plan canvas** | Canvas container and its loading placeholder |
+| **Map points of interest** | Pins, popup cards and category pills |
+| **Hide an element** | A `display: none` starting point |
 
-- Font families
-- Font sizes for different elements
-- Font weights and styles
+The searchbox editor has its own set: shell, filters row, dropdown menus, search button, range sliders and chips.
 
-**Layout & Spacing**
+### Step 3: Save and publish
 
-- Padding and margins
-- Border radius values
-- Grid gaps and alignment
+Click **Save & publish** (or press <kbd>⌘</kbd>/<kbd>Ctrl</kbd> \+ <kbd>S</kbd>). The status above the editor tells you where you stand: _Nothing overridden yet_, _Unsaved changes_ or _Published_.
 
-**Visual Effects**
+Publishing uploads your stylesheet and turns custom CSS on for this viewer — there's no separate toggle to flip anymore.
 
-- Box shadows
-- Hover effects
-- Transitions and animations
+The links under the button cover everything else:
 
-### Step 4: Upload Your Custom CSS
+| Button | What it does |
+| --- | --- |
+| **View default theme** | Opens the default stylesheet in a new tab, as a reference |
+| **Import .css** | Loads a `.css` file from your computer into the editor (max 1.5 MB) |
+| **Download** | Saves the editor's current content as a `.css` file |
+| **Published file** | Opens the stylesheet that's currently live |
+| **Revert** | Discards unsaved changes and restores the published version |
+| **Remove** | Stops using custom CSS on this viewer |
 
-1. Return to **Style & Embed** → **Style** → **Custom CSS**
-2. Click **Upload Custom CSS File**
-3. Select your modified CSS file
-4. Click **Save**
+<Note>
+  Every save uploads a new file, so your previous versions stay available — nothing is overwritten.
+</Note>
 
-### Step 5: Add the URL Parameter
+### Step 4: Add the URL parameter
 
-Update your embed code to include the `customCss=true` parameter:
+Custom CSS only loads on embeds that ask for it:
 
 **Before:**
 
@@ -98,11 +112,24 @@ Update your embed code to include the `customCss=true` parameter:
 
 ---
 
-## Understanding CSS Selectors
+## Group, enterprise and searchbox stylesheets
 
-### Use the Right Selectors
+Each surface has its own stylesheet, edited the same way:
 
-Our system uses CSS Modules, which means you need to target elements using specific attribute selectors and class wildcards. The default template already includes these, but here's what to know if you're adding new styles:
+| Surface | Where to find it |
+| --- | --- |
+| **Project** | Project **Style & Embed** → **Style** → **Customize** → **`</>` Custom CSS** |
+| **Group** | Group **Style & Embed** → **Style** → **Customize** → **`</>` Custom CSS** |
+| **Enterprise** | Enterprise **Settings** → **Style** → **Customize** → **`</>` Custom CSS** |
+| **Searchbox** | Enterprise **Settings** → **Searchbox** → **Custom CSS** → **Open style editor** |
+
+The searchbox uses the same editor. When you open it from an enterprise, a **Viewer / Searchbox** switch appears at the top of the sidebar so you can move between the two stylesheets — the preview and the snippet list follow along. Searchbox selectors aren't scoped to `[data-pp-embed]`, since the searchbox is its own page.
+
+---
+
+## Understanding CSS selectors
+
+The viewer is built with CSS Modules, so class names get a unique suffix (`unitTile` becomes something like `Style1_unitTile__a1B2c`). Target elements with the stable `data-pp-*` attributes and with `[class*="…"]` wildcards.
 
 **✅ Correct selectors that work:**
 
@@ -167,9 +194,7 @@ Our system uses CSS Modules, which means you need to target elements using speci
 [data-theme="showcase"]
 ```
 
-### Common Elements You Can Style
-
-Here are some frequently customized elements:
+### Common elements you can style
 
 | Element | Selector | What it controls |
 | --- | --- | --- |
@@ -201,14 +226,37 @@ Here are some frequently customized elements:
 
 ---
 
-## CSS Custom Properties (Variables)
+## CSS custom properties (variables)
 
-The template uses CSS custom properties for easy theme-wide changes. Modify these at the top of your CSS file for consistent styling:
+The default theme is built on CSS custom properties. Overriding them is the safest way to restyle the viewer: a few lines change everything consistently, and they keep working when the design is updated.
+
+<Note>
+  These variables live in _your_ stylesheet, not in the viewer itself. Setting `--pp-brand-primary` on its own does nothing until a rule reads it — which is exactly what the snippets do. Add **Brand colours** first, then any other snippet follows it.
+</Note>
 
 ```css
 [data-pp-embed] {
-  /* Brand Colors */
+  /* Brand — every snippet derives from --pp-brand-primary */
   --pp-brand-primary: #5b4cdb;
+
+  /* Solid brand colour with a subtle sheen: buttons, chips, filter bar.
+     Swap it for a gradient if you want a two-tone look. */
+  --pp-brand-surface: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(0, 0, 0, 0.12) 100%
+    ),
+    var(--pp-brand-primary);
+
+  /* Pale wash of the brand colour: hover and selected states */
+  --pp-brand-tint: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(255, 255, 255, 0.9) 100%
+    ),
+    var(--pp-brand-primary);
+
+  /* Optional accents — nothing uses them unless you do */
   --pp-brand-secondary: #7c3aed;
   --pp-brand-accent: #8b5cf6;
   --pp-brand-light: #ede9fe;
@@ -244,13 +292,9 @@ The template uses CSS custom properties for easy theme-wide changes. Modify thes
 }
 ```
 
-Changing these values will update styling throughout your viewer automatically.
-
 ---
 
-## Example: Styling Status Badges
-
-Here's an example of how to style the availability badges:
+## Example: styling status badges
 
 ```css
 /* Available badge - green gradient */
@@ -286,30 +330,33 @@ Here's an example of how to style the availability badges:
 
 ## Troubleshooting
 
-### My custom CSS isn't showing up
+### It looks right in the editor but not on my site
 
-**Check these common issues:**
-
-1. **Missing URL parameter:** Ensure `?customCss=true` is in your embed URL
-2. **Custom CSS not enabled:** Verify it's toggled on in Project Settings → Style
-3. **Wrong selectors:** Make sure you're using `[class*="className"]` pattern for nested elements, not plain class names or non-existent data attributes
-4. **Missing `!important`:** Many styles require `!important` to override defaults
-5. **Cache issues:** Try clearing your browser cache or testing in an incognito window
-6. **File upload failed:** Re-upload your CSS file and confirm the save was successful
+1. **Missing URL parameter:** make sure `?customCss=true` is in your embed URL
+2. **Not published:** the status above the editor must read _Published_, not _Unsaved changes_ — click **Save & publish**
+3. **Cache:** reload with a hard refresh, or test in a private window
 
 ### Some elements aren't styling correctly
 
-This usually means you're using selectors that don't match our system:
+You're probably using selectors that don't exist in the viewer:
 
 - ❌ Don't use: `[data-pp-button]`, `[data-pp-unit-tile]`, `.unitTile`
 - ✅ Do use: `[class*="button"]`, `[class*="unitTile"]`
 
-Download a fresh copy of the default template and compare your selectors to the working examples included.
+Inspect the element in the live preview to see the exact class, then target it with a `[class*="…"]` wildcard.
 
-### Styles work in dev tools but not in my CSS file
+### My rule is ignored
 
-Make sure you're adding `!important` to your declarations. CSS Modules generate high-specificity selectors, so you need `!important` to override them.
+Add `!important`. CSS Modules generate high-specificity selectors, so most overrides need it.
 
-### How do I reset to the default theme?
+### I changed a `--pp-*` variable and nothing happened
 
-In **Style & Embed** → **Style** → **Custom CSS**, click **Remove Custom CSS** or simply remove the `?customCss=true` parameter from your embed URL.
+Variables only do something when a rule reads them. They're defined by your stylesheet, not by the viewer — so `--pp-brand-primary` on its own changes nothing. Add the **Brand colours** snippet plus the snippet for the section you want to restyle.
+
+### My viewer stopped getting design updates
+
+That happens when the published stylesheet is a full copy of the default theme: it pins every component to an old version. Trim it down to the rules you actually changed.
+
+### How do I go back to the default theme?
+
+Click **Remove** in the CSS editor, or drop the `?customCss=true` parameter from your embed URL. Removing doesn't delete your stylesheet — you can paste it back later.
