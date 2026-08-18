@@ -1,0 +1,122 @@
+---
+title: "Enterprise Map & Points of Interest"
+description: "How to show Points of Interest on your Enterprise map and control the embed with URL parameters (project=, grid=false, pois=true, and more)."
+---
+
+## Overview
+
+Your **Enterprise** embed shows every project and group on a single map. You can also scope that same map down to **one project** (or a small cluster of nearby projects) — for example to drop a "neighbourhood" map on that project's own page — and layer **Points of Interest** (nearby amenities, transit, shops) on top.
+
+Both of these are controlled by a handful of parameters added to the end of the embed's URL. This article covers what each one does, plus how to manage Points of Interest from your dashboard.
+
+<Note>
+  These parameters apply to the **Enterprise map embed** specifically. For deep-linking to a unit or collection on any embed (project, group, or enterprise), see [Deep Linking to specific units](/link-units).
+</Note>
+
+---
+
+## Points of Interest (POIs)
+
+Points of Interest let you pin nearby places — restaurants, transit stops, schools, parks — next to your project pins on the Enterprise map. Each POI shows a custom icon on the map and opens a card with its title, category, description, and photo when clicked.
+
+### Managing POIs in the dashboard
+
+1. Open your **Enterprise** in the dashboard and go to **Settings**.
+2. Click the **POIs** tab.
+3. Under **Categories**, add a category for each type of place you want to show (e.g. "Restaurant", "Grocery Store", "Metro Station") and upload an icon for it. Categories let every POI of the same type share one icon.
+4. Under **POIs**, click **+ Add POI** to create one manually — give it a title, pick a category, add a description, and search for its address (Planpoint locates it on the map for you). Or click **Import** to upload a CSV or Excel file of places in bulk; rows with an address are located automatically, and categories are matched to the ones you've already created.
+5. Titles and descriptions can each have translations for every language your embed supports — useful if your POI list was written in one language but your embed serves visitors in several.
+
+### Showing POIs on the embed
+
+POIs are **off by default** on every Enterprise embed — turn them on per embed with:
+
+```text
+https://yourwebsite.com/your-page?pois=true
+```
+
+Add `poiDirections=true` to also draw a walking/driving route with travel time from a project to its nearest POIs when that project is hovered or selected:
+
+```text
+https://yourwebsite.com/your-page?pois=true&poiDirections=true
+```
+
+<Tip>
+  POIs are styled with the same theme and Custom CSS as the rest of your embed. See [Custom CSS](/custom-css) if you want to restyle the pins or cards beyond the built-in themes.
+</Tip>
+
+---
+
+## Scoping the map to specific projects
+
+By default, the Enterprise map shows all of your projects and groups. Use `project=` to scope it down to one project, or a short list of nearby ones:
+
+```text
+https://yourwebsite.com/your-page?project=Riverside%20Tower
+```
+
+To show a small cluster of neighbouring projects on the same scoped map (their pins appear for context, but only the first project's units are listed), separate names with a comma:
+
+```text
+https://yourwebsite.com/your-page?project=Riverside%20Tower,Riverside%20Annex
+```
+
+`project=` matches your project or group's name (case-insensitive). When it's set, the map automatically centers and zooms on that project, and Points of Interest (if enabled) are limited to the area immediately around it — see `poiRadius` below.
+
+---
+
+## Parameter Reference
+
+| Param | What it does | Default |
+| --- | --- | --- |
+| `project` | Scopes the map to one project/group by name, or a comma-separated list of names | Off (shows everything) |
+| `pois` | Shows Points of Interest (`true` or `1`) | Off |
+| `poiDirections` | Draws a route + travel time from the active project to its nearest POIs (`true` or `1`); only takes effect alongside `pois=true` | Off |
+| `poiRadius` | How far (in km) around a `project=`-scoped project to keep POIs visible | `3` |
+| `grid` | Hides the project/unit list next to the map, so the map fills the full width (`false` or `0`) | Shown |
+| `zoom` | Overrides the map's initial zoom level | Project's saved zoom |
+| `center` | Overrides the map's initial center point, as `longitude,latitude` | Project's saved center |
+
+<Warning>
+  For `center`, always use `longitude,latitude` in that order — not `lat`/`lng`. Those two parameter names are reserved for the searchbox's location filter.
+</Warning>
+
+---
+
+## Full-width, map-only embed
+
+Hide the side list entirely so the map fills the embed on its own — handy for a compact "find us nearby" widget on a project page:
+
+```text
+https://yourwebsite.com/your-page?project=Riverside%20Tower&pois=true&grid=false
+```
+
+---
+
+## Custom map framing
+
+If you want an embed to open already zoomed to a particular area rather than your project's saved default, combine `zoom` and `center`:
+
+```text
+https://yourwebsite.com/your-page?zoom=14&center=-73.5674,45.5019
+```
+
+---
+
+## Quick Examples
+
+| Goal | Add to your page URL |
+| --- | --- |
+| Show POIs on the full Enterprise map | `?pois=true` |
+| Show POIs with travel times | `?pois=true&poiDirections=true` |
+| Scope the map to one project | `?project=Riverside%20Tower` |
+| Scope the map to a cluster of nearby projects | `?project=Riverside%20Tower,Riverside%20Annex` |
+| Scoped map, full-width, with POIs | `?project=Riverside%20Tower&pois=true&grid=false` |
+| Widen the POI search radius to 5 km | `?project=Riverside%20Tower&pois=true&poiRadius=5` |
+| Open the map at a custom zoom and location | `?zoom=14&center=-73.5674,45.5019` |
+
+All of these can be combined in the same URL, for example:
+
+```text
+https://yourwebsite.com/your-page?project=Riverside%20Tower&pois=true&poiDirections=true&grid=false&poiRadius=4
+```
