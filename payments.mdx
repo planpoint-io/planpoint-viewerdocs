@@ -50,3 +50,20 @@ In the Payments module, you can customize the following settings:
 </Steps>
 
 <Note>Please note that you can enable or disable the payment options in the Settings module, under Style and Embed.</Note>
+
+## Custom Reservation Flow (CRF)
+
+The **Custom Reservation Flow** is a guided, 3-step flow you can share with visitors instead of (or alongside) the regular plan viewer: they pick their favourite unit(s), book a time through Calendly, then optionally pay a refundable deposit to confirm.
+
+<Note>This section only appears once your project has a Calendly connection (**Username** and **API Key**) set up under Settings, in the Connections section.</Note>
+
+<Steps>
+  <Step title="Step 1 - Refundable deposit">
+    Set the deposit amount and currency that will be charged at the end of the booking flow, through the payment provider already connected to your account (Stripe or PayPal, configured in your Account Settings under Payments). Set the amount to **0** to skip the payment step entirely and only require the Calendly booking.
+  </Step>
+  <Step title="Step 2 - Flow URL">
+    Copy the **Flow URL** link to share directly with visitors, or add `?crf=1` to your project's regular viewer URL to open it in the Custom Reservation Flow.
+  </Step>
+</Steps>
+
+All deposits collected through the Custom Reservation Flow are recorded and listed under the **Transactions** tab of the Payments module.
