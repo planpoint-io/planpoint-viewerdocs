@@ -41,32 +41,38 @@ Paste the code where you want your Planpoint Viewer to appear. The Planpoint Vie
       ![](https://i.postimg.cc/5yFLG18X/style-and-embed-2.jpg)
     </Frame>
   </Step>
-  <Step title="Step 2">
-    To preview your work in progress, simply choose the desired **language** output, assign the **namespace**, **project name**, plan viewer **theme** and click on **Open a new tab**.
+  <Step title="Step 2 - Embed & Hosting">
+    In the **Embed & Hosting** card, you'll find:
 
-    <Frame>
-      ![](https://i.postimg.cc/brgrmwv0/style-adn-embed.jpg)
-    </Frame>
+    - **Project path** - the part of the URL that identifies this project (what used to be called the "namespace"). Changing it breaks any embed code already pasted on your site.
+    - **Language** - the language your embedded Viewer displays in. To support multiple languages on your site, generate and paste a separate embed code for each one.
+    - **Custom Domain** _(optional)_ - serve your Viewer (and crawlable per-unit pages, for SEO) on your own subdomain instead of planpoint.io.
+    - **Embed Code** - click **Click to copy** to grab the current HTML/JS snippet for the language selected above.
+    - **Planpoint URL** - opens the live Viewer in a new tab, handy for testing before you paste the code anywhere.
 
     <Info>
-      Assign a permanent namespace and project name before embedding the code. If these are modified, the code will cease to function, necessitating the need for re-embedding.
+      Theme and color changes are no longer baked into the embed code - the Viewer always pulls your latest style live, so you never need to re-copy/re-paste the code after a style change. Only the **Project path** and **Language** affect the code itself.
     </Info>
   </Step>
   <Step title="Step 3">
-    A new window will open up with the live preview of your current project. Test your plan viewer and make changes accordingly. You will need to reload the preview in order for changes to take effect.
-
-    <Frame>
-      ![](https://i.postimg.cc/Df9X089D/preview.jpg)
-    </Frame>
+    Test your plan viewer with **Planpoint URL** and make changes accordingly - reload the tab after each change to see it take effect.
   </Step>
-  <Step title="Step 4">
-    Once you're satisfied with your plan viewer, simply select the desired language **output** and **theme**, and click on **Click to copy**.
+  <Step title="Step 4 - Style">
+    Further down, the **Style** card lets you fine-tune how the Viewer looks and behaves:
 
-    - You can export as many instances of your plan viewer as you wish, in 5 languages (English, French, Spanish, Chinese and German). Each language will have it's own script to copy-paste.
-    - You should paste the code wherever you want your plan viewer to appear in your website. The plan viewer will fill the parent element in which it's inserted. The code will work on every major website platform, from Wordpress to Wix and custom HTML.
+    | Setting | What it does |
+    | --- | --- |
+    | Default view | Show units as a **List** or a **Grid** (2, 3 or 4 per row) |
+    | Grid image | In grid view, show the unit layout, the first gallery image, or a custom cover image per unit |
+    | Skeleton loading | Shows a loading placeholder while the Viewer loads |
+    | Mobile load behavior | Infinite scroll vs a "View more" button on mobile lists/grids |
+    | Default currency / Dynamic currency converter | Set the currency symbol shown, and optionally let visitors convert prices to their own currency live |
+    | Area Unit | ft² or m² |
+    | Show floor overview | Shows how many units are available on a floor on hover |
+    | Branding | Toggle the Planpoint logo/branding on the embed |
+    | Polygon outline | Adds a white outline to floor and unit polygons |
+    | Highlight animation | Animates the floors on first load, hinting that they're interactive |
 
-    <Frame>
-      ![](https://i.postimg.cc/G908fmwH/copy-code.jpg)
-    </Frame>
+    Click **Customize Style** to pick a theme, set a custom color scheme (see the [color guide](/colors)), and edit your project's terminology.
   </Step>
 </Steps>
