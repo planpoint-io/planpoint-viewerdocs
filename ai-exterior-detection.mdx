@@ -1,0 +1,78 @@
+---
+title: "AI Exterior Detection"
+description: "Detect and outline floors or commercial spaces from a building image before reviewing the results"
+---
+
+AI Exterior Detection reads the active building image and traces the visible floors in perspective. For projects without a floor step, it can trace commercial spaces instead. Nothing is saved until you review and apply the results.
+
+{/* VIDEO PLACEHOLDER (Marios): Record and add a short AI Exterior Detection overview here. Show the active building image, setup, progress, review assignments and final outlines. */}
+
+## Before you start
+
+For the strongest results, use an image that:
+
+- Shows one building clearly.
+- Has an unobstructed view of the facade.
+- Makes rows of windows, balconies, entrances or storefront divisions easy to follow.
+- Includes the complete visible building rather than a tightly cropped section.
+
+Your account also needs at least **one AI credit**. Each building-image detection costs one credit.
+
+<Note>
+  The image currently selected in **Exterior** is the one Planpoint analyzes. Select the correct image first when the project has alternative exterior covers.
+</Note>
+
+## Detect floors or spaces
+
+<Steps>
+  <Step title="Open Exterior">
+    Go to **Content → Exterior** and select the building image you want to process. Click **Detect floors**. On projects without a floor step, the action is **Detect spaces**.
+  </Step>
+  <Step title="Choose a detection mode">
+    Select **Best quality** for complex facades, setbacks and angled building views. Select **Faster** for a quicker, value-optimized pass on clear, front-facing images.
+
+    The setup screen also shows your AI credit balance and the cost of the detection.
+
+    {/* SCREENSHOT PLACEHOLDER (Marios): AI Exterior Detection setup screen with Best quality/Faster, credit balance and Start detection. */}
+  </Step>
+  <Step title="Start detection">
+    Click **Start detection**. Planpoint reads the building shot, identifies the visible floors or spaces, traces each region in perspective and prepares matches against the records in your project.
+  </Step>
+  <Step title="Review every region">
+    In the full-screen review, inspect the proposed outlines and assign each region to an existing floor or space, create a new record, or skip it.
+
+    Resolve any duplicate assignments before applying the results.
+
+    {/* SCREENSHOT PLACEHOLDER (Marios): Exterior detection review showing floor polygons over the building and assignment controls. */}
+  </Step>
+  <Step title="Apply and fine-tune">
+    Apply the reviewed results to save them. Use **Redraw** beside an individual floor or space when its outline needs a manual adjustment.
+  </Step>
+</Steps>
+
+## What the detector looks for
+
+For residential projects, Planpoint follows rows of windows and balconies to identify complete storey bands, including visible wings and setbacks. It traces the perspective visible in the image rather than forcing horizontal rectangles.
+
+For commercial projects without a floor step, Planpoint uses entrances, window groups, columns, facade changes and signage to separate occupiable spaces.
+
+## AI credits
+
+A detection costs **one AI credit per building image**. The setup screen shows the current balance and includes a **Top up** link. Failed detections and results with no usable regions are refunded automatically.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="I do not see Detect floors or Detect spaces">
+    AI Exterior Detection may need to be enabled for your account. Confirm that the project has an exterior image, then contact Planpoint support if the action is still unavailable.
+  </Accordion>
+  <Accordion title="A floor was missed or counted twice">
+    Try **Best quality** with a clearer or more front-facing image. During review, keep the useful regions and skip duplicates, then draw or redraw the remaining floor manually.
+  </Accordion>
+  <Accordion title="The detector analyzed the wrong image">
+    Close the review, select the intended exterior cover and start a new detection. The selected cover in the Exterior module determines which image is analyzed.
+  </Accordion>
+  <Accordion title="A detected region is assigned to the wrong floor">
+    Change that region's assignment during review. Nothing changes in the project until you apply the results.
+  </Accordion>
+</AccordionGroup>
