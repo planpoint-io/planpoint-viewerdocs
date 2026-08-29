@@ -37,3 +37,77 @@ Selecting **draw floorplan** option will enable you to draw the polygon for the 
 </Steps>
 
 <Warning>Clicking on the **delete** button will remove the entire floor along with its units.</Warning>
+
+## AI Unit Detection
+
+AI Unit Detection reads a floorplan image, traces the visible unit boundaries and helps match those outlines to the units already in your project. Nothing is saved until you review and apply the results.
+
+{/* MEDIA PLACEHOLDER (Marios): Add the existing two-minute unit detector overview video here. Upload it under /images and use the same <Frame><video><source /></video></Frame> pattern as analytics.mdx. */}
+
+### Before you start
+
+Make sure that:
+
+- The floor has a clear JPG or PNG floorplan.
+- Unit boundaries and numbers are readable at the uploaded resolution.
+- The units have already been imported or added when you want Planpoint to match outlines to existing records.
+- Your account has at least **one AI credit**. Each floorplan detection costs one credit.
+
+<Note>
+  AI Unit Detection works best on high-contrast architectural plans. Faint scans, overlapping annotations and low-resolution images may need more manual adjustment.
+</Note>
+
+### Detect the units
+
+<Steps>
+  <Step title="Open the floor">
+    Go to **Content → Floors**. Find the floorplan you want to process and click **Detect units**.
+  </Step>
+  <Step title="Choose a detection mode">
+    Select **Best quality** for complex or crowded floorplans. Select **Faster** for a quicker, value-optimized pass on clear and simple plans.
+
+    Turn **Include balconies, terraces and gardens** off when you only want the enclosed interior boundary of each unit.
+
+    {/* SCREENSHOT PLACEHOLDER (Marios): AI Unit Detection setup screen showing Best quality/Faster, the balcony toggle, credit balance and Start detection. */}
+  </Step>
+  <Step title="Start detection">
+    Confirm the credit balance and click **Start detection**. Planpoint uploads the floorplan for analysis, finds the units, cleans up the outlines and prepares matches against your project data.
+
+    You can follow each stage in the progress window. Processing a complex floorplan can take several minutes.
+  </Step>
+  <Step title="Review every result">
+    Planpoint opens a full-screen review after detection. Check each outline and choose whether it should:
+
+    - Update an existing unit.
+    - Create a new unit.
+    - Be skipped.
+
+    Printed unit numbers are used to suggest matches where possible. Resolve any duplicate assignments before applying the results.
+
+    {/* SCREENSHOT PLACEHOLDER (Marios): Unit detection review screen with polygons and assignment controls visible. */}
+  </Step>
+  <Step title="Apply and fine-tune">
+    Apply the reviewed results to save them. You can then use **Redraw** on individual units to adjust any outline that needs a manual correction.
+  </Step>
+</Steps>
+
+### AI credits
+
+A detection costs **one AI credit per floorplan**. The setup screen shows the current balance and includes a **Top up** link. Failed detections and results with no usable regions are refunded automatically.
+
+### AI detection troubleshooting
+
+<AccordionGroup>
+  <Accordion title="I do not see Detect units">
+    Confirm that the floor has a floorplan image and that AI detection is enabled for your account. Contact Planpoint support if the action is still unavailable.
+  </Accordion>
+  <Accordion title="Some units were missed or merged">
+    Try **Best quality** with the clearest available source image. After applying the useful results, redraw any missing or inaccurate outline manually.
+  </Accordion>
+  <Accordion title="The wrong unit was selected during review">
+    Use the assignment control for that region to select the correct existing unit, create a new one or skip it. Nothing changes in the project until you apply the review.
+  </Accordion>
+  <Accordion title="Outdoor areas changed the unit boundary">
+    Run detection with **Include balconies, terraces and gardens** turned off when you only need enclosed interior outlines.
+  </Accordion>
+</AccordionGroup>
