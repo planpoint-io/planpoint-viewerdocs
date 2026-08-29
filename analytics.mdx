@@ -82,7 +82,7 @@ The **Conversion funnel** shows three stages, **Views → Downloads → Leads**,
 
 "People who opened this unit also opened…". Pick a unit and see which other units share the most visitors. Great for spotting which plans compete with each other, and for suggesting a realistic second option when a buyer's first choice is gone.
 
-This is built from an anonymous per-browser id. It never identifies a person. The tab is hidden if no visitor has opened at least two units.
+This is built from an anonymous per-browser id. It never identifies a person. Before a visitor has opened at least two units, the tab remains visible with an empty state explaining what activity it needs.
 
 ### Bedroom types / Area
 
@@ -113,11 +113,15 @@ The tab remains visible before any price history has been recorded and explains 
 
 **Enterprise only.** What people typed into your enterprise searchbox, whether or not they clicked anything: **Bedrooms**, **Property type**, **Neighbourhood**, **Price range** and **Status**. This is genuine unmet demand, it tells you what buyers wanted before they saw what you actually have.
 
+The tab remains visible before any search activity has been recorded and explains that it is waiting for visitors to use the enterprise searchbox.
+
 ### Geography
 
 A map of approximate visitor locations, with sub-tabs for **Views**, **Downloads**, **Favorites** and **Leads**. Locations are derived from request metadata (city, region, country), never from a lead's form details.
 
 When older activity predates location tracking, Analytics shows how many events have location data out of the full total. The map and ranking only include the located events, while the headline cards continue to include all activity.
+
+The tab remains visible before location data is available and explains that locations will appear as new activity is recorded.
 
 <Frame caption="See where viewer engagement comes from">
   <img src="/images/analytics-geography.png" alt="Visitor geography map with engagement locations and a Montreal tooltip" />
@@ -155,7 +159,7 @@ On an enterprise, a **Projects** panel sits at the top of Analytics, above the t
 
 The selection is applied everywhere, not just on the charts: KPI totals, every tab, the spreadsheet and JSON exports, the PDF report and the AI summary all follow the projects you picked.
 
-<Note>The **Search** tab disappears while a subset of projects is selected. Searchbox queries are made across the whole enterprise before a visitor picks a project, so they can't honestly be attributed to individual projects. Select all projects to see search demand again.</Note>
+<Note>The **Search** tab shows an empty state while a subset of projects is selected. Searchbox queries are made across the whole enterprise before a visitor picks a project, so they can't honestly be attributed to individual projects. Select all projects to see search demand again.</Note>
 
 <Note>Scheduled monthly report emails always cover the full enterprise. The project selection applies to what you're looking at, and to reports you download or send yourself.</Note>
 
