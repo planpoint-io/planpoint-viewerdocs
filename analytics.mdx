@@ -95,6 +95,8 @@ Two views:
 * **Comparison** — share of views (demand) against share of remaining inventory (supply), per bedroom type or area band. Where demand runs ahead of supply, you're likely underpriced or short on that type; the reverse suggests stock that needs help.
 * **Remaining supply** — what's actually left, by bedroom type or area range.
 
+Gap points are calculated as **supply share minus demand share**. A negative gap means demand is stronger than the available supply; a positive gap means supply is ahead of demand.
+
 Sold and leased units are not counted as remaining supply.
 
 <Frame caption="Compare demand share with remaining supply">
@@ -114,6 +116,8 @@ The tab only appears once at least one price change has been recorded, and a uni
 ### Geography
 
 A map of approximate visitor locations, with sub-tabs for **Views**, **Downloads**, **Favorites** and **Leads**. Locations are derived from request metadata (city, region, country), never from a lead's form details.
+
+When older activity predates location tracking, Analytics shows how many events have location data out of the full total. The map and ranking only include the located events, while the headline cards continue to include all activity.
 
 <Frame caption="See where viewer engagement comes from">
   <img src="/images/analytics-geography.png" alt="Visitor geography map with engagement locations and a Montreal tooltip" />
