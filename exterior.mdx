@@ -32,6 +32,18 @@ description: 'Following the completion of the settings module, proceed to the ex
   </Step>
 </Steps>
 
+## Exterior hover colors
+
+Exterior shapes use the project's **Hover** color by default, even when unit availabilities are displayed elsewhere in the Viewer.
+
+To color exterior shapes by availability, go to **Settings → Customization → Availabilities**, enable **Availabilities**, then turn on **Use availability colors on exterior**. The status colors are configured under **Settings → Style & Embed → Customize Style → Color Scheme**.
+
+For projects without a floor step, each exterior shape uses that space or unit's status. For projects with floors, a floor can contain mixed inventory, so Planpoint uses the first status that applies in this order: **Available**, **Reserved**, **Future**, **Unavailable**, then **Sold/Leased**.
+
+<Note>
+  This option changes the color shown when an exterior shape is highlighted. It does not make all exterior shapes permanently visible.
+</Note>
+
 ## AI Exterior Detection
 
 AI Exterior Detection reads the active building image and traces the visible floors in perspective. For projects without a floor step, it can trace commercial spaces instead. Nothing is saved until you review and apply the results.
