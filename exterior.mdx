@@ -48,10 +48,10 @@ For projects without a floor step, each exterior shape uses that space or unit's
 
 AI Exterior Detection reads the active building image and traces the visible floors in perspective. For projects without a floor step, it can trace commercial spaces instead. Nothing is saved until you review and apply the results.
 
-<Frame caption="Video placeholder — AI Exterior Detection overview">
-  <div style={{ aspectRatio: "16 / 9", display: "grid", placeItems: "center", padding: "32px", background: "#f0f2f4", color: "#475569", textAlign: "center" }}>
-    <span><strong>Marios: add an overview showing the building image, setup, progress, review assignments and final outlines.</strong><br /><code>/images/ai-exterior-detection-overview.m4v</code></span>
-  </div>
+<Frame caption="Detect, review, and apply floor outlines from a building image">
+  <video controls playsInline preload="metadata" style={{ width: "100%" }}>
+    <source src="/images/ai-exterior-detection-overview.m4v" type="video/mp4" />
+  </video>
 </Frame>
 
 ### Before you start
@@ -63,7 +63,7 @@ For the strongest results, use an image that:
 - Makes rows of windows, balconies, entrances or storefront divisions easy to follow.
 - Includes the complete visible building rather than a tightly cropped section.
 
-Your account also needs at least **one AI credit**. Each building-image detection costs one credit.
+Your account also needs enough AI credits for the selected mode. **Faster** costs one credit and **Best quality** costs three credits per building image.
 
 <Note>
   The image currently selected in **Exterior** is the one Planpoint analyzes. Select the correct image first when the project has alternative exterior covers.
@@ -80,10 +80,8 @@ Your account also needs at least **one AI credit**. Each building-image detectio
 
     The setup screen also shows your AI credit balance and the cost of the detection.
 
-    <Frame caption="Screenshot placeholder — exterior detection setup">
-      <div style={{ aspectRatio: "16 / 9", display: "grid", placeItems: "center", padding: "32px", background: "#f0f2f4", color: "#475569", textAlign: "center" }}>
-        <span><strong>Marios: add the setup screen showing both modes, credit balance and Start detection.</strong><br /><code>/images/ai-exterior-detection-setup.png</code></span>
-      </div>
+    <Frame caption="Choose the detection mode for the building image">
+      <img src="/images/ai-exterior-detection-setup.png" alt="Detect Floors With AI setup showing Best quality and Faster modes, the selected mode cost, credit balance, and Start detection button" />
     </Frame>
   </Step>
   <Step title="Start detection">
@@ -94,10 +92,8 @@ Your account also needs at least **one AI credit**. Each building-image detectio
 
     Resolve any duplicate assignments before applying the results.
 
-    <Frame caption="Screenshot placeholder — exterior detection review">
-      <div style={{ aspectRatio: "16 / 9", display: "grid", placeItems: "center", padding: "32px", background: "#f0f2f4", color: "#475569", textAlign: "center" }}>
-        <span><strong>Marios: add the review screen with floor polygons over the building and assignment controls.</strong><br /><code>/images/ai-exterior-detection-review.png</code></span>
-      </div>
+    <Frame caption="Review each detected floor outline and assignment">
+      <img src="/images/ai-exterior-detection-review.png" alt="AI exterior detection review showing numbered floor outlines over a building and controls to create, skip, or assign each detected region" />
     </Frame>
   </Step>
   <Step title="Apply and fine-tune">
@@ -113,7 +109,7 @@ For commercial projects without a floor step, Planpoint uses entrances, window g
 
 ### AI credits
 
-A detection costs **one AI credit per building image**. The setup screen shows the current balance and includes a **Top up** link. Failed detections and results with no usable regions are refunded automatically.
+**Faster** detection costs one AI credit per building image. **Best quality** costs three credits. The setup screen shows the current balance, selected mode cost, and a **Top up** link. Failed detections and results with no usable regions are refunded automatically.
 
 ### AI detection troubleshooting
 

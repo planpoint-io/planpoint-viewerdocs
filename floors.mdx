@@ -42,10 +42,10 @@ Selecting **draw floorplan** option will enable you to draw the polygon for the 
 
 AI Unit Detection reads a floorplan image, traces the visible unit boundaries and helps match those outlines to the units already in your project. Nothing is saved until you review and apply the results.
 
-<Frame caption="Video placeholder — AI Unit Detection overview">
-  <div style={{ aspectRatio: "16 / 9", display: "grid", placeItems: "center", padding: "32px", background: "#f0f2f4", color: "#475569", textAlign: "center" }}>
-    <span><strong>Marios: add the existing two-minute overview video here.</strong><br /><code>/images/ai-unit-detection-overview.m4v</code></span>
-  </div>
+<Frame caption="Detect, review, and apply unit outlines from a floorplan">
+  <video controls playsInline preload="metadata" style={{ width: "100%" }}>
+    <source src="/images/ai-unit-detection-overview.mp4" type="video/mp4" />
+  </video>
 </Frame>
 
 ### Before you start
@@ -55,7 +55,7 @@ Make sure that:
 - The floor has a clear JPG or PNG floorplan.
 - Unit boundaries and numbers are readable at the uploaded resolution.
 - The units have already been imported or added when you want Planpoint to match outlines to existing records.
-- Your account has at least **one AI credit**. Each floorplan detection costs one credit.
+- Your account has enough AI credits for the selected mode. **Faster** costs one credit and **Best quality** costs three credits per floorplan.
 
 <Note>
   AI Unit Detection works best on high-contrast architectural plans. Faint scans, overlapping annotations and low-resolution images may need more manual adjustment.
@@ -72,10 +72,8 @@ Make sure that:
 
     Turn **Include balconies, terraces and gardens** off when you only want the enclosed interior boundary of each unit.
 
-    <Frame caption="Screenshot placeholder — unit detection setup">
-      <div style={{ aspectRatio: "16 / 9", display: "grid", placeItems: "center", padding: "32px", background: "#f0f2f4", color: "#475569", textAlign: "center" }}>
-        <span><strong>Marios: add the setup screen showing both modes, the balcony toggle, credit balance and Start detection.</strong><br /><code>/images/ai-unit-detection-setup.png</code></span>
-      </div>
+    <Frame caption="Choose a detection mode and whether to include outdoor areas">
+      <img src="/images/ai-unit-detection-setup.png" alt="Detect Units With AI setup showing Best quality and Faster modes, the outdoor-area toggle, credit cost, and Start detection button" />
     </Frame>
   </Step>
   <Step title="Start detection">
@@ -92,10 +90,8 @@ Make sure that:
 
     Printed unit numbers are used to suggest matches where possible. Resolve any duplicate assignments before applying the results.
 
-    <Frame caption="Screenshot placeholder — unit detection review">
-      <div style={{ aspectRatio: "16 / 9", display: "grid", placeItems: "center", padding: "32px", background: "#f0f2f4", color: "#475569", textAlign: "center" }}>
-        <span><strong>Marios: add the review screen with polygons and assignment controls visible.</strong><br /><code>/images/ai-unit-detection-review.png</code></span>
-      </div>
+    <Frame caption="Review each detected outline and its unit assignment">
+      <img src="/images/ai-unit-detection-review.png" alt="AI unit detection review showing numbered floorplan outlines and controls to create, skip, or assign each detected region" />
     </Frame>
   </Step>
   <Step title="Apply and fine-tune">
@@ -105,7 +101,7 @@ Make sure that:
 
 ### AI credits
 
-A detection costs **one AI credit per floorplan**. The setup screen shows the current balance and includes a **Top up** link. Failed detections and results with no usable regions are refunded automatically.
+**Faster** detection costs one AI credit per floorplan. **Best quality** costs three credits. The setup screen shows the current balance, selected mode cost, and a **Top up** link. Failed detections and results with no usable regions are refunded automatically.
 
 ### AI detection troubleshooting
 
