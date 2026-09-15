@@ -1,0 +1,182 @@
+---
+title: "Spotlight Mode"
+description: "Place interactive pins on your exterior image and let visitors explore selected properties on desktop and mobile."
+---
+
+Spotlight presents your main exterior image with clickable pins connected to your inventory. It is an alternative entry point to the viewer: visitors can explore properties directly from the image instead of starting with the usual floor selection.
+
+On desktop, the image appears beside the inventory. On mobile, visitors can tap a pin, swipe through property cards, and open a dedicated filter sheet.
+
+## Before You Start
+
+- Add a main [exterior image](/exterior) to your project.
+- Create the [units](/units) or spaces you want to link to pins, including their names, images, and availability.
+- Check the project's filter and visibility settings. Spotlight uses the same inventory data as the regular viewer.
+
+<Note>
+  Spotlight uses the main exterior cover automatically. There is no separate
+  Spotlight image upload. If you replace the main cover, review your pin
+  positions because the image composition may have changed.
+</Note>
+
+## Set Up Spotlight
+
+<Steps>
+  <Step title="Open Spotlight configuration">
+    Open your project in the dashboard, go to **Sales & Marketing**, then select **Spotlight > General**.
+
+    The configuration includes **Pinpoints editing**, **Pinpoints color**, **Spotlight URL**, and **Embed code**.
+
+    <Frame caption="Screenshot placeholder 1: Spotlight configuration">
+      <div style={{ minHeight: 180, display: "grid", placeItems: "center", padding: 24, border: "1px dashed currentColor", borderRadius: 8, textAlign: "center" }}>
+        Marios: add the Sales &amp; Marketing &gt; Spotlight &gt; General screen, showing the four configuration rows.
+      </div>
+    </Frame>
+
+  </Step>
+
+  <Step title="Place pins on the exterior">
+    Beside **Pinpoints editing**, click **Add** or **Edit** to open the full-screen editor.
+
+    Click an empty location on the image to create a pin. The target picker opens so you can choose the unit or space that the pin represents.
+
+    <Frame caption="Screenshot placeholder 2: Pin editor">
+      <div style={{ minHeight: 180, display: "grid", placeItems: "center", padding: 24, border: "1px dashed currentColor", borderRadius: 8, textAlign: "center" }}>
+        Marios: add the full-screen editor with the main exterior, several pins, the Pin size slider, and Save visible.
+      </div>
+    </Frame>
+
+  </Step>
+
+  <Step title="Choose and review each target">
+    Select the correct target in the picker. Click an existing pin to change its target, or use **Delete pinpoint** in the picker to remove it.
+
+    For a standard project, pins link to units. Projects that skip the floor step use spaces. Group and enterprise configurations offer their corresponding project or group target pickers.
+
+    <Frame caption="Screenshot placeholder 3: Target picker">
+      <div style={{ minHeight: 180, display: "grid", placeItems: "center", padding: 24, border: "1px dashed currentColor", borderRadius: 8, textAlign: "center" }}>
+        Marios: add the target picker with a property selected and the Delete pinpoint action visible.
+      </div>
+    </Frame>
+
+  </Step>
+
+  <Step title="Adjust position, size, and color">
+    Drag a pin to reposition it without reopening the target picker. A focused pin can also be nudged with the arrow keys; hold **Shift** for a larger adjustment.
+
+    Use **Pin size** inside the editor to resize the dots. Changes appear immediately. The setting applies to all pins and supports a radius of **6-24 px**, with **10 px** as the default.
+
+    Click **Save** to persist the pin positions, targets, deletions, and size together. Then close the editor. Use **Pinpoints color** in the General configuration to change the color.
+
+    <Warning>
+      Closing the editor is not a substitute for clicking Save. Save your changes before leaving the editor or reloading the dashboard.
+    </Warning>
+
+  </Step>
+</Steps>
+
+## Share or Embed Spotlight
+
+Use **Spotlight URL > Open in new tab** to preview the configured experience. Share that URL to send visitors directly to Spotlight.
+
+To place it on your website, click **Embed code > Click to copy** and insert the generated code into your website's HTML or embed block. Give the embed enough vertical space for both the exterior and the inventory on mobile.
+
+<Frame caption="Screenshot placeholder 4: Spotlight URL and embed code">
+  <div
+    style={{
+      minHeight: 180,
+      display: "grid",
+      placeItems: "center",
+      padding: 24,
+      border: "1px dashed currentColor",
+      borderRadius: 8,
+      textAlign: "center",
+    }}
+  >
+    Marios: add a close-up of the Spotlight URL and Embed code rows.
+  </div>
+</Frame>
+
+<Note>
+  The generated Spotlight link includes `spotlight=true`. Keep this parameter
+  when sharing the link. The regular viewer URL remains available; configuring
+  pins does not replace its default opening view.
+</Note>
+
+See [Style & Embed](/preview-embed) for general embedding settings.
+
+## What Visitors See
+
+### Desktop
+
+Visitors see the exterior beside the inventory cards. Hovering over a unit pin reveals its preview, and clicking it opens that unit's details. Inventory filters remain available alongside the image.
+
+<Frame caption="Screenshot placeholder 5: Desktop Spotlight">
+  <div
+    style={{
+      minHeight: 180,
+      display: "grid",
+      placeItems: "center",
+      padding: 24,
+      border: "1px dashed currentColor",
+      borderRadius: 8,
+      textAlign: "center",
+    }}
+  >
+    Marios: add the desktop viewer with the full exterior, inventory cards, and
+    a unit-pin preview.
+  </div>
+</Frame>
+
+### Mobile
+
+The exterior sits above a horizontally scrollable inventory. Tap a unit pin to bring its matching card into view, swipe the cards to explore, and tap a card to open the property's details.
+
+The inventory header shows the matching result count. **Filters** opens a bottom sheet with the project's enabled filters and an active-filter count on the button. Choose options or adjust ranges, then use the checkmark or close button to return to the cards. **Clear all** resets the selections.
+
+The sheet keeps its close and reset controls available while the filter content scrolls. Motion is reduced when the visitor's device requests reduced motion.
+
+<Frame caption="Screenshot placeholder 6: Mobile viewer and filters">
+  <div
+    style={{
+      minHeight: 240,
+      display: "grid",
+      placeItems: "center",
+      padding: 24,
+      border: "1px dashed currentColor",
+      borderRadius: 8,
+      textAlign: "center",
+    }}
+  >
+    Marios: add two mobile captures, one showing a selected pin and its card,
+    and one showing the open filter sheet with a selected filter.
+  </div>
+</Frame>
+
+## Review Before Publishing
+
+- Open the generated Spotlight URL on desktop and mobile.
+- Confirm each pin points to the intended property and opens or selects the correct item.
+- Check pin positions against the current main exterior cover.
+- Verify that names, images, availability, and enabled filters are correct.
+- Test the actual website embed, including short phone screens, not just the standalone viewer.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The pin editor is not available">
+    Add a main exterior image first. The Pinpoints editing row is only available when the entity has a main cover.
+  </Accordion>
+  <Accordion title="A pin opens the wrong property">
+    Open the editor, click that pin, choose the correct target, and click Save. Reload the Spotlight URL to verify the change.
+  </Accordion>
+  <Accordion title="Pins no longer line up with the building">
+    Check whether the main exterior image was replaced or recomposed. Pin locations are stored relative to the image, so a different composition may require repositioning them.
+  </Accordion>
+  <Accordion title="A property does not appear in the inventory">
+    Clear the active filters, verify the pin's target, and review the project's availability and visibility settings. Linking a pin does not override the normal visibility rules.
+  </Accordion>
+  <Accordion title="My shared link opens the regular viewer">
+    Copy the Spotlight URL from Sales & Marketing > Spotlight > General again and ensure the spotlight=true parameter has not been removed by your website or link tool.
+  </Accordion>
+</AccordionGroup>
