@@ -28,10 +28,8 @@ On desktop, the image appears beside the inventory. On mobile, visitors can tap 
 
     The configuration includes **Pinpoints editing**, **Pinpoints color**, **Spotlight URL**, and **Embed code**.
 
-    <Frame caption="Screenshot placeholder 1: Spotlight configuration">
-      <div style={{ minHeight: 180, display: "grid", placeItems: "center", padding: 24, border: "1px dashed currentColor", borderRadius: 8, textAlign: "center" }}>
-        Marios: add the Sales &amp; Marketing &gt; Spotlight &gt; General screen, showing the four configuration rows.
-      </div>
+    <Frame caption="Spotlight General configuration">
+      <img src="/images/spotlight/configuration.png" alt="Spotlight General configuration with Pinpoints editing, Pinpoints color, Spotlight URL, and Embed code" />
     </Frame>
 
   </Step>
@@ -43,10 +41,8 @@ On desktop, the image appears beside the inventory. On mobile, visitors can tap 
 
     When the project has multiple exterior covers, use the numbered exterior selector at the top of the editor before placing pins. Each pin belongs to the exterior on which it was created. Existing pins created before multi-exterior support remain on exterior **1**.
 
-    <Frame caption="Screenshot placeholder 2: Pin editor">
-      <div style={{ minHeight: 180, display: "grid", placeItems: "center", padding: 24, border: "1px dashed currentColor", borderRadius: 8, textAlign: "center" }}>
-        Marios: add the full-screen editor with multiple exterior selectors, several pins, the Pin color control, the Pin size slider, and Save visible.
-      </div>
+    <Frame caption="Spotlight pin editor">
+      <img src="/images/spotlight/pin-editor.png" alt="Spotlight pin editor with exterior selectors, pins, Pin color, Pin size, and Save" />
     </Frame>
 
   </Step>
@@ -56,10 +52,8 @@ On desktop, the image appears beside the inventory. On mobile, visitors can tap 
 
     For a standard project, pins link to units. Projects that skip the floor step use spaces. Group and enterprise configurations offer their corresponding project or group target pickers.
 
-    <Frame caption="Screenshot placeholder 3: Target picker">
-      <div style={{ minHeight: 180, display: "grid", placeItems: "center", padding: 24, border: "1px dashed currentColor", borderRadius: 8, textAlign: "center" }}>
-        Marios: add the target picker with a property selected and the Delete pinpoint action visible.
-      </div>
+    <Frame caption="Select a target for the pinpoint">
+      <img src="/images/spotlight/target-picker.png" alt="Spotlight target picker showing floors, units, and the Delete pinpoint action" />
     </Frame>
 
   </Step>
@@ -82,24 +76,14 @@ On desktop, the image appears beside the inventory. On mobile, visitors can tap 
 
 Use **Spotlight URL > Open in new tab** to preview the configured experience. Share that URL to send visitors directly to Spotlight.
 
+The Spotlight URL must include the `spotlight=true` query parameter. If you build the URL in code, append the parameter to the regular viewer URL.
+
 When multiple exterior covers are available, use the **360°** control at the top of the image. On desktop, click its left half for the previous exterior or its right half for the next exterior. A regular tap advances to the next exterior.
 
 To place it on your website, click **Embed code > Click to copy** and insert the generated code into your website's HTML or embed block. Give the embed enough vertical space for both the exterior and the inventory on mobile.
 
-<Frame caption="Screenshot placeholder 4: Spotlight URL and embed code">
-  <div
-    style={{
-      minHeight: 180,
-      display: "grid",
-      placeItems: "center",
-      padding: 24,
-      border: "1px dashed currentColor",
-      borderRadius: 8,
-      textAlign: "center",
-    }}
-  >
-    Marios: add a close-up of the Spotlight URL and Embed code rows.
-  </div>
+<Frame caption="Add the Spotlight parameter to a viewer URL">
+  <img src="/images/spotlight/spotlight-parameter.png" alt="Code editor showing a Planpoint viewer URL with the spotlight=true parameter" />
 </Frame>
 
 <Note>
@@ -116,21 +100,8 @@ See [Style & Embed](/preview-embed) for general embedding settings.
 
 Visitors see the exterior beside the inventory cards. Hovering over a unit pin reveals its preview, and clicking it opens that unit's details. When multiple exteriors are available, the **360°** control cycles through them and shows the pins configured for each view. Inventory filters remain available alongside the image.
 
-<Frame caption="Screenshot placeholder 5: Desktop Spotlight">
-  <div
-    style={{
-      minHeight: 180,
-      display: "grid",
-      placeItems: "center",
-      padding: 24,
-      border: "1px dashed currentColor",
-      borderRadius: 8,
-      textAlign: "center",
-    }}
-  >
-    Marios: add the desktop viewer with the full exterior, inventory cards, and
-    a unit-pin preview.
-  </div>
+<Frame caption="Desktop Spotlight viewer">
+  <img src="/images/spotlight/desktop-viewer.png" alt="Desktop Spotlight viewer with an exterior image, unit pins, filters, and inventory cards" />
 </Frame>
 
 ### Mobile
@@ -141,21 +112,8 @@ The inventory header shows the matching result count. **Filters** opens a bottom
 
 The sheet keeps its close and reset controls available while the filter content scrolls. Motion is reduced when the visitor's device requests reduced motion.
 
-<Frame caption="Screenshot placeholder 6: Mobile viewer and filters">
-  <div
-    style={{
-      minHeight: 240,
-      display: "grid",
-      placeItems: "center",
-      padding: 24,
-      border: "1px dashed currentColor",
-      borderRadius: 8,
-      textAlign: "center",
-    }}
-  >
-    Marios: add two mobile captures, one showing a selected pin and its card,
-    and one showing the open filter sheet with a selected filter.
-  </div>
+<Frame caption="Mobile Spotlight viewer and filters">
+  <img src="/images/spotlight/mobile-filters.png" alt="Mobile Spotlight viewer with a selected pin, unit card, and open Filters sheet" />
 </Frame>
 
 ## Review Before Publishing
