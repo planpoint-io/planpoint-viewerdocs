@@ -1,0 +1,221 @@
+---
+title: "Webhooks"
+description: "Get notified the moment someone leaves a lead or joins a waitlist."
+---
+
+Webhooks let your own systems hear about new leads and waitlist signups as they happen, without polling the API. You give us a URL, and every time one of these events happens in your project, we send a `POST` request to it with the details.
+
+## Events
+
+| Event | When it's sent |
+| --- | --- |
+| `lead.created` | Someone submits a lead form on your project. |
+| `waitlist.created` | Someone joins the waitlist of your project. |
+
+A webhook listens to both events by default. You can pick just one when you register it.
+
+You'll need an API token (see [Authentication](/api-documentation/endpoint/user/login)) for a user who can edit the project: the owner, an administrator or an editor.
+
+## Register a webhook
+
+Send a `POST` to your project's webhooks endpoint with your API token:
+
+```bash
+curl -X POST "https://app.planpoint.io/api/projects/PROJECT_ID/webhooks" \
+  -H "Authorization: Bearer YOUR_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "url": "https://your-server.com/planpoint-webhook",
+    "events": ["lead.created", "waitlist.created"]
+  }'
+```
+
+The response includes the webhook and its signing secret:
+
+```json
+{
+  "webhook": {
+    "_id": "6721f0c2a1b2c3d4e5f61102",
+    "url": "https://your-server.com/planpoint-webhook",
+    "events": ["lead.created", "waitlist.created"],
+    "active": true,
+    "failureCount": 0,
+    "secretHint": "…9f3a"
+  },
+  "secret": "whsec_3b1f0c...9f3a",
+  "message": "Save this secret now, it won't be shown again"
+}
+```
+
+<Warning>
+The `secret` is only shown once, in this response. Store it somewhere safe right away: you'll need it to verify that requests really come from Planpoint. If you lose it, delete the webhook and create a new one.
+</Warning>
+
+A few rules for the URL:
+
+- It has to be `https`, and reachable from the internet. Internal and private addresses are rejected.
+- We don't follow redirects, so point it at the final address.
+- Each project can have up to 10 webhooks.
+
+## What we send
+
+Every delivery is a `POST` with a JSON body like this:
+
+```json
+{
+  "id": "evt_8a4c2e1b-5f7d-4c1a-9e3b-2d6f8a0c4b71",
+  "event": "lead.created",
+  "createdAt": "2026-10-29T12:00:00.000Z",
+  "project": {
+    "id": "6721f0c2a1b2c3d4e5f61101",
+    "name": "Riverside Towers"
+  },
+  "data": {
+    "id": "6721f0c2a1b2c3d4e5f61199",
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "email": "jane@example.com",
+    "phone": "+1 555 0100",
+    "unit": "4B",
+    "message": "I'd like to visit this unit"
+  }
+}
+```
+
+What goes in `data` depends on the fields of your form, so it can have more or fewer fields than this example.
+
+`data.id` is the lead's id in Planpoint. It's missing if your account is set up not to store leads.
+
+And these headers:
+
+| Header | What it is |
+| --- | --- |
+| `Content-Type` | Always `application/json`. |
+| `User-Agent` | `Planpoint-Webhooks/1.0` |
+| `X-Planpoint-Event` | The event, for example `lead.created`. |
+| `X-Planpoint-Delivery` | The same `id` as in the body. |
+| `X-Planpoint-Signature` | `t=<timestamp>,v1=<signature>`. See below. |
+
+Answer with any `2xx` status within 5 seconds to let us know you got it. Anything else, or no answer in time, counts as a failure and we'll retry.
+
+<Note>
+The same event can occasionally reach you more than once (for example, if your server got it but answered too late). Use `id` to ignore repeats.
+</Note>
+
+## Verify the signature
+
+Anyone could send a request to your URL, so check the signature before trusting it. The `X-Planpoint-Signature` header has two parts:
+
+- `t`: when we sent it, in Unix seconds.
+- `v1`: an HMAC-SHA256 of `"<t>.<raw body>"`, using your webhook secret as the key, in hex.
+
+To verify it, compute the same HMAC on your side and compare. Use the raw body exactly as it arrived: if you parse the JSON and stringify it again, the signature won't match.
+
+Here's a short example with Node and Express:
+
+```js
+const crypto = require("crypto");
+const express = require("express");
+
+const app = express();
+const SECRET = process.env.PLANPOINT_WEBHOOK_SECRET; // the whsec_... you saved
+const TOLERANCE_SECONDS = 5 * 60;
+
+function isValidSignature(header, rawBody) {
+  const parts = Object.fromEntries(header.split(",").map((part) => part.split("=")));
+  const timestamp = Number(parts.t);
+
+  // Reject old requests, so a captured one can't be replayed later.
+  if (!timestamp || Math.abs(Date.now() / 1000 - timestamp) > TOLERANCE_SECONDS) {
+    return false;
+  }
+
+  const expected = crypto
+    .createHmac("sha256", SECRET)
+    .update(`${timestamp}.${rawBody}`)
+    .digest("hex");
+
+  const received = Buffer.from(parts.v1 || "", "hex");
+  const computed = Buffer.from(expected, "hex");
+  return received.length === computed.length && crypto.timingSafeEqual(received, computed);
+}
+
+// express.raw keeps the body as it arrived, which is what was signed.
+app.post("/planpoint-webhook", express.raw({ type: "application/json" }), (req, res) => {
+  const signature = req.get("X-Planpoint-Signature") || "";
+  if (!isValidSignature(signature, req.body.toString("utf8"))) {
+    return res.status(400).send("Invalid signature");
+  }
+
+  const event = JSON.parse(req.body);
+  // ...do your thing with event.data
+
+  res.sendStatus(200);
+});
+```
+
+## Retries
+
+If a delivery fails, we try again with growing gaps between attempts:
+
+| Retry | Wait since the previous attempt |
+| --- | --- |
+| 1st | 1 minute |
+| 2nd | 5 minutes |
+| 3rd | 30 minutes |
+| 4th | 2 hours |
+| 5th | 12 hours |
+
+That's one first attempt plus 5 retries, over about 15 hours. Every retry carries the same body, with the same `id`. If the last one also fails, we stop trying for that event.
+
+### Automatic pause
+
+If a webhook fails 20 times in a row, we pause it so we don't keep calling a server that's down. While it's paused, no events are sent to it. Once your server is back, turn it on again (see below): that also resets its failure count. Retries that were still pending when it got paused are dropped.
+
+## Manage your webhooks
+
+All of these use the same `Authorization: Bearer YOUR_API_TOKEN` header.
+
+### List them
+
+```bash
+curl "https://app.planpoint.io/api/projects/PROJECT_ID/webhooks" \
+  -H "Authorization: Bearer YOUR_API_TOKEN"
+```
+
+Each webhook comes with its delivery status (`lastStatus`, `lastError`, `lastDeliveryAt`, `failureCount`). The secret is never shown again, only its last 4 characters in `secretHint`, so you can tell them apart.
+
+### Send a test
+
+```bash
+curl -X POST "https://app.planpoint.io/api/projects/PROJECT_ID/webhooks/WEBHOOK_ID/test" \
+  -H "Authorization: Bearer YOUR_API_TOKEN"
+```
+
+We send a signed `webhook.test` event to your URL right away and tell you how it went:
+
+```json
+{ "ok": true, "status": 200, "error": null }
+```
+
+It's the quickest way to check your URL and your signature code before real leads come in. Test events aren't retried.
+
+### Pause or turn it back on
+
+```bash
+curl -X PATCH "https://app.planpoint.io/api/projects/PROJECT_ID/webhooks/WEBHOOK_ID" \
+  -H "Authorization: Bearer YOUR_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{ "active": false }'
+```
+
+Send `{ "active": true }` to turn it back on.
+
+### Delete it
+
+```bash
+curl -X DELETE "https://app.planpoint.io/api/projects/PROJECT_ID/webhooks/WEBHOOK_ID" \
+  -H "Authorization: Bearer YOUR_API_TOKEN"
+```
+
+Pending retries for a deleted webhook are dropped.

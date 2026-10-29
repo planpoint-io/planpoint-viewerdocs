@@ -127,6 +127,12 @@
                 "pages": [
                   "api-documentation/endpoint/leads/get"
                 ]
+              },
+              {
+                "group": "Webhooks",
+                "pages": [
+                  "api-documentation/webhooks"
+                ]
               }
             ]
           },
