@@ -56,6 +56,7 @@ The response includes the webhook and its signing secret:
     "events": ["lead.created", "waitlist.created"],
     "active": true,
     "failureCount": 0,
+    "failedDeliveries": 0,
     "secretHint": "…9f3a"
   },
   "secret": "whsec_3b1f0c...9f3a",
@@ -186,7 +187,14 @@ That's one first attempt plus 5 retries, over about 15 hours. Every retry carrie
 
 ### Automatic pause
 
-If a webhook fails 20 times in a row, we pause it so we don't keep calling a server that's down. While it's paused, no events are sent to it. Once your server is back, turn it on again (see below): that also resets its failure count. Retries that were still pending when it got paused are dropped.
+If 20 events in a row fail even after all their retries, we pause the webhook so we don't keep calling a server that's down. Retries don't count on their own: an event only counts once its last retry fails, and any event that gets through resets the count. You can follow it in `failedDeliveries`.
+
+While a webhook is paused:
+
+- Events that were still waiting for a retry are kept, and sent shortly after you turn it back on. We keep them for 3 days after the event; anything older is dropped.
+- New events (leads or waitlist sign-ups that come in while it's paused) are not sent and not kept for later.
+
+Once your server is back, turn it on again (see below). That also resets `failureCount` and `failedDeliveries`.
 
 ## Manage your webhooks
 
@@ -199,7 +207,7 @@ curl "https://app.planpoint.io/api/projects/PROJECT_ID/webhooks" \
   -H "Authorization: Bearer YOUR_API_TOKEN"
 ```
 
-Each webhook comes with its delivery status (`lastStatus`, `lastError`, `lastDeliveryAt`, `failureCount`). `lastError` stays there after a later delivery works, so go by `failureCount` to tell whether a webhook is healthy. The secret is never shown again, only its last 4 characters in `secretHint`, so you can tell them apart.
+Each webhook comes with its delivery status (`lastStatus`, `lastError`, `lastDeliveryAt`, `failureCount`, `failedDeliveries`). `failureCount` is how many attempts in a row have failed, retries included, and goes back to 0 as soon as one works. `failedDeliveries` is how many events in a row failed after all their retries, which is what the [automatic pause](#automatic-pause) goes by. `lastError` stays there after a later delivery works, so go by `failureCount` to tell whether a webhook is healthy. The secret is never shown again, only its last 4 characters in `secretHint`, so you can tell them apart.
 
 ### Send a test
 
@@ -221,6 +229,7 @@ We send a signed `webhook.test` event to your URL right away and tell you how it
     "events": ["lead.created", "waitlist.created"],
     "active": true,
     "failureCount": 0,
+    "failedDeliveries": 0,
     "lastDeliveryAt": "2026-11-04T13:50:00.000Z",
     "lastStatus": 200,
     "createdAt": "2026-11-04T13:45:00.000Z",
@@ -231,7 +240,7 @@ We send a signed `webhook.test` event to your URL right away and tell you how it
 
 `webhook` is the webhook as it is right after the test, with its delivery status updated. Like everywhere else, it never includes the secret.
 
-It's the quickest way to check your URL and your signature code before real leads come in. Test events aren't retried. A failed test does count toward the [automatic pause](#automatic-pause), and a successful one resets the count.
+It's the quickest way to check your URL and your signature code before real leads come in. Test events aren't retried, and a failed one doesn't count toward the [automatic pause](#automatic-pause): it only shows up in `failureCount`. One that works resets `failureCount`, and `failedDeliveries` too unless the webhook is paused.
 
 ### Pause or turn it back on
 
@@ -253,4 +262,4 @@ curl -X DELETE "https://app.planpoint.io/api/projects/PROJECT_ID/webhooks/WEBHOO
   -H "Authorization: Bearer YOUR_API_TOKEN"
 ```
 
-Pending retries for a deleted webhook are dropped.
+Pending retries for a deleted webhook are dropped. If you only want to stop deliveries for a while, pause it instead: pending retries are kept for up to 3 days.
